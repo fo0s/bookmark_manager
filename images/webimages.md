@@ -1,0 +1,1 @@
+Web images project folder
