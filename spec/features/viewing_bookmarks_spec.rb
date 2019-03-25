@@ -3,7 +3,7 @@ require 'spec_helper'
 feature 'Shows content on the site' do
   scenario 'visiting the index page' do
     visit('/')
-    expect(page).to have_content 'Bookmark Manager'
+    expect(page).to have_content 'Bookmark Index'
   end
 
   # Start of user stories

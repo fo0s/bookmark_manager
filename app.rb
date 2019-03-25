@@ -1,17 +1,15 @@
 require 'sinatra/base'
+require './lib/bookmark'
 
+# Bookmark page
 class BookmarkManager < Sinatra::Base
   get '/' do
-    'Bookmark Manager'
+    'Bookmark Index'
   end
 
   get '/bookmarks' do
-    bookmarks = [
-                'https://makers.tech/',
-                'https://relishapp.com/',
-                'https://www.google.com/'
-                ]
-    bookmarks.join
+    @bookmarks = Bookmark.all
+    erb :'bookmarks/index'
   end
 
   run! if app_file == $0
