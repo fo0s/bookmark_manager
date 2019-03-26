@@ -12,16 +12,25 @@
 # the additional setup, and require it from the spec files that actually need
 # it.
 
-# Set the environment to "test"
-ENV['RACK_ENV'] = 'test'
-
-# Bring in the contents of the `app.rb` file
-require File.join(File.dirname(__FILE__), '..', 'app.rb')
-
 # Require all the testing gems
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+
+# Reset database each time this file runs
+require_relative 'setup_test_database'
+
+RSpec.configure do |config|
+  ENV['ENVIRONMENT'] = 'test'
+
+  config.before(:each) do
+    setup_test_database
+  end
+
+  # Bring in the contents of the `app.rb` file
+  require File.join(File.dirname(__FILE__), '..', 'app.rb')
+  srand RSpec.configuration.seed
+end
 
 # Tell Capybara to talk to BookmarkManager
 Capybara.app = BookmarkManager
