@@ -1,0 +1,6 @@
+example_id                                      | status | run_time        |
+----------------------------------------------- | ------ | --------------- |
+./spec/bookmark_spec.rb[1:1]                    | passed | 0.09295 seconds |
+./spec/bookmark_spec.rb[2:1]                    | passed | 0.06158 seconds |
+./spec/features/creating_bookmarks_spec.rb[1:1] | passed | 0.14782 seconds |
+./spec/features/viewing_bookmarks_spec.rb[1:1]  | passed | 0.05129 seconds |

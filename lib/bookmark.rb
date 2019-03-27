@@ -25,13 +25,23 @@ class Bookmark
   end
 
   def self.create(url:, title:)
+
+    return false unless is_url?(url)
+
     if ENV['ENVIRONMENT'] == 'test'
       connection = PG.connect(dbname: 'bookmark_manager_test')
     else
       connection = PG.connect(dbname: 'bookmark_manager')
     end
 
-    result = connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, title, url; "))
+    result = connection.exec("INSERT INTO bookmarks (url, title) VALUES('#{url}', '#{title}') RETURNING id, title, url; ")
     Bookmark.new(id: result[0]['id'], title: result[0]['title'], url: result[0]['url'])
   end
+
+  private
+
+  def self.is_url?(link)
+    link =~ /\A#{URI::regexp(['http', 'https'])}\z/
+  end
+
 end

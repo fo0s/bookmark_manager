@@ -1,19 +1,10 @@
 require 'sinatra/base'
 require './lib/bookmark'
-require 'pg'
+require 'uri'
 
 # Bookmark page
 class BookmarkManager < Sinatra::Base
   get '/' do
-    'Bookmark Index'
-  end
-
-  get '/bookmarks/new' do
-    erb :'bookmarks/new'
-  end
-
-  post '/bookmarks' do
-    Bookmark.create(url: params[:url], title: params[:title])
     redirect '/bookmarks'
   end
 
@@ -23,5 +14,14 @@ class BookmarkManager < Sinatra::Base
     erb :'bookmarks/index'
   end
 
-  run! if app_file == $0
+  post '/bookmarks' do
+    Bookmark.create(url: params[:url], title: params[:title])
+    redirect '/bookmarks'
+  end
+
+  get '/bookmarks/new' do
+    erb :'bookmarks/new'
+  end
+
+  run! if app_file == $PROGRAM_NAME
 end
