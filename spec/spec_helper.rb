@@ -1,28 +1,27 @@
 # Require all the testing gems
-require 'capybara'
 require 'capybara/rspec'
-require 'rspec'
+require 'simplecov'
+require 'simplecov-console'
+require_relative './setup_test_database'
 
-# Reset database each time this file runs
-require_relative 'setup_test_database'
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
+                                                                 SimpleCov::Formatter::Console
+                                                               ])
+SimpleCov.start
 
-require File.join(File.dirname(__FILE__), '..', './app.rb')
-
-# Tell Capybara to talk to BookmarkManager
-Capybara.app = BookmarkManager
-
-# Set rspec up to testing environment
-ENV['ENVIRONMENT'] = 'test'
-
-# Configuraton settings
 RSpec.configure do |config|
-  config.expect_with :rspec do |expectations|
-    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
-  end
+  ENV['ENVIRONMENT'] = 'test'
 
   config.before(:each) do
     setup_test_database
   end
+
+  require File.join(File.dirname(__FILE__), '..', 'app.rb')
+
+  Capybara.app = BookmarkManager
+
+  srand RSpec.configuration.seed
+end
 
   # Seed global randomization
   # srand RSpec.configuration.seed
@@ -44,4 +43,3 @@ RSpec.configure do |config|
 
   # Speed up tests
   # config.profile_examples = 10
-end
