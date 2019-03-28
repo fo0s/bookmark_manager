@@ -25,16 +25,15 @@ RSpec.configure do |config|
   end
 
   # Seed global randomization
-  srand RSpec.configuration.seed
-
-  config.mock_with :rspec do |mocks|
-    mocks.verify_partial_doubles = true
-  end
+  # srand RSpec.configuration.seed
+  # config.mock_with :rspec do |mocks|
+  #   mocks.verify_partial_doubles = true
+  # end
 
   # Allows RSpec to persist some state between runs in order to support
   # the `--only-failures` and `--next-failure` CLI options. We recommend
   # you configure your source control system to ignore this file.
-  config.example_status_persistence_file_path = 'spec/examples.txt'
+  # config.example_status_persistence_file_path = 'spec/examples.txt'
 
   # This setting enables warnings. It's recommended, but in some cases may
   # be too noisy due to issues in dependencies.
@@ -44,5 +43,5 @@ RSpec.configure do |config|
   # config.default_formatter = 'doc' if config.files_to_run.one?
 
   # Speed up tests
-  config.profile_examples = 10
+  # config.profile_examples = 10
 end
