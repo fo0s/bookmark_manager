@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pg'
 
 # As a user
 # So I can store bookmark data for later retrieval
@@ -7,8 +6,6 @@ require 'pg'
 
 feature 'Adding a new bookmark' do
   scenario 'A user can add a bookmark to Bookmark Manager' do
-    PG.connect(dbname: 'bookmark_manager_test')
-
     visit('/bookmarks/new')
 
     fill_in('url', with: 'http://www.testbookmark.com')

@@ -38,10 +38,10 @@ RSpec.configure do |config|
 
   # This setting enables warnings. It's recommended, but in some cases may
   # be too noisy due to issues in dependencies.
-  config.warnings = true
+  # config.warnings = true
 
   # Verbose mode
-  config.default_formatter = 'doc' if config.files_to_run.one?
+  # config.default_formatter = 'doc' if config.files_to_run.one?
 
   # Speed up tests
   config.profile_examples = 10
